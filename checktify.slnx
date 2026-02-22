@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Checktify.API/Checktify.API.csproj" />
+  <Project Path="Checktify.Application/Checktify.Application.csproj" />
+  <Project Path="Checktify.Domain/Checktify.Domain.csproj" />
+  <Project Path="Checktify.Infrastructure/Checktify.Infrastructure.csproj" />
+  <Project Path="Checktify.Web/Checktify.Web.csproj" />
+</Solution>
