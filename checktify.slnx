@@ -1,7 +1,8 @@
 <Solution>
   <Project Path="Checktify.API/Checktify.API.csproj" />
-  <Project Path="Checktify.Application/Checktify.Application.csproj" />
-  <Project Path="Checktify.Domain/Checktify.Domain.csproj" />
-  <Project Path="Checktify.Infrastructure/Checktify.Infrastructure.csproj" />
+  <Project Path="Checktify.Core/Checktify.Core.csproj" Id="4483ae05-0a84-487d-8719-ef287dcc6716" />
+  <Project Path="Checktify.Entity/Checktify.Entity.csproj" Id="6c578be3-13e4-4bf3-94f0-f746bdc52626" />
+  <Project Path="Checktify.Repository/Checktify.Repository.csproj" Id="cf3908c6-e8ef-45f3-bf78-ab1be6d13018" />
+  <Project Path="Checktify.Service/Checktify.Service.csproj" Id="b5098a1e-a7de-4056-9ee5-b28b86b46047" />
   <Project Path="Checktify.Web/Checktify.Web.csproj" />
 </Solution>
