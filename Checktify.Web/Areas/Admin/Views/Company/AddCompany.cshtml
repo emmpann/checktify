@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "AddCompany";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Add Company</h3>
+                    </div><!-- .nk-block-head-content -->
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <form action="#">
+                            <div class="form-group">
+                                <label class="form-label" for="name">Name</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="code">Code</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="code">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-control-sm custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="active" checked>
+                                    <label class="custom-control-label" for="active">Active Status</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-primary">Save</button>
+                            </div>
+                        </form>
+                        <!--row-->
+                    </div><!-- .card-inner-group -->
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>

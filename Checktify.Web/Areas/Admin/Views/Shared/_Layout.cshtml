@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="zxx" class="js">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="~/Admin/src/images/favicon.png">
+    <!-- Page Title  -->
+    <title>Checktify</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="~/Admin/src/assets/css/dashlite.css?ver=3.0.3">
+    <link id="skin-default" rel="stylesheet" href="~/Admin/src/assets/css/theme.css?ver=3.0.3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+    <div class="nk-app-root">
+        <!-- main @@s -->
+        <div class="nk-main ">
+            <!-- sidebar @@s -->
+            <div class="nk-sidebar nk-sidebar-fixed is-dark " data-content="sidebarMenu">
+                <div class="nk-sidebar-element nk-sidebar-head">
+                    <div class="nk-menu-trigger">
+                        <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em class="icon ni ni-arrow-left"></em></a>
+                        <a href="#" class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
+                    </div>
+                    <div class="nk-sidebar-brand">
+                        <a href="html/crm/index.html" class="logo-link nk-sidebar-logo">
+                            <img class="logo-light logo-img" src="~/Admin/src/images/logo.png" srcset="./images/logo2x.png 2x" alt="logo">
+                            <img class="logo-dark logo-img" src="~/Admin/src/images/logo-dark.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
+                        </a>
+                    </div>
+                </div><!-- .nk-sidebar-element -->
+                <div class="nk-sidebar-element nk-sidebar-body">
+                    <div class="nk-sidebar-content">
+                        <div class="nk-sidebar-menu" data-simplebar>
+                            <ul class="nk-menu">
+
+                                <li class="nk-menu-item">
+                                    <a href="html/crm/customer-list.html" class="nk-menu-link">
+                                        <span class ="nk-menu-icon"><i class="bi bi-building-fill-add"></i></span>
+                                        <span class="nk-menu-text">Company</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                                <li class="nk-menu-item">
+                                    <a href="html/crm/customer-list.html" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><i class="bi bi-geo-alt-fill"></i></span>
+                                        <span class="nk-menu-text">Company Location</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                                <li class="nk-menu-item">
+                                    <a href="html/crm/customer-list.html" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><i class="bi bi-stopwatch-fill"></i></span>
+                                        <span class="nk-menu-text">Work Schedule</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                                <li class="nk-menu-item">
+                                    <a href="html/crm/customer-list.html" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><i class="bi bi-person-fill-gear"></i></span>
+                                        <span class="nk-menu-text">Role</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                                <li class="nk-menu-item">
+                                    <a href="html/crm/customer-list.html" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><i class="bi bi-person-badge-fill"></i></span>
+                                        <span class="nk-menu-text">Employee</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                                <li class="nk-menu-item">
+                                    <a href="html/crm/customer-list.html" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><i class="bi bi-calendar-week-fill"></i></span>
+                                        <span class="nk-menu-text">Attendance</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                            </ul><!-- .nk-menu -->
+                        </div><!-- .nk-sidebar-menu -->
+                    </div><!-- .nk-sidebar-content -->
+                </div><!-- .nk-sidebar-element -->
+            </div>
+            <!-- sidebar @@e -->
+            <!-- wrap @@s -->
+            <div class="nk-wrap ">
+
+                <!-- main header @@e -->
+                <!-- content @@s -->
+                <div class="nk-content ">
+                    @RenderBody()
+                </div>
+                <!-- content @@e -->
+            </div>
+            <!-- wrap @@e -->
+        </div>
+        <!-- main @@e -->
+    </div>
+    <!-- app-root @@e -->
+    <!-- JavaScript -->
+    <script src="~/Admin/src/assets/js/bundle.js?ver=3.0.3"></script>
+    <script src="~/Admin/src/assets/js/scripts.js?ver=3.0.3"></script>
+    <script src="~/Admin/src/assets/js/charts/chart-crm.js?ver=3.0.3"></script>
+</body>
+
+</html>
