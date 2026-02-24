@@ -1,4 +1,5 @@
-﻿
+﻿@model List<CompanyListVM>
+
 @{
     ViewData["Title"] = "GetCompanyList";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -20,11 +21,9 @@
                         <div class="card-inner position-relative card-tools-toggle">
                             <div class="card-title-group d-flex justify-content-between align-items-center">
                                 <div>
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-primary" data-bs-toggle="dropdown">
-                                            <em class="icon ni ni-plus"></em>
-                                        </a>
-                                    </div>
+                                    <a asp-area="Admin" asp-controller="Company" asp-action="AddCompany" class="btn btn-icon btn-primary">
+                                        <em class="icon ni ni-plus"></em>
+                                    </a>
                                 </div>
                                 <div class="card-tools me-n1">
                                     <ul class="btn-toolbar gx-1">
@@ -189,45 +188,50 @@
                                         </div>
                                     </div>
                                 </div><!-- .nk-tb-item -->
-                                <div class="nk-tb-item">
-                                    <div class="nk-tb-col nk-tb-col-check">
-                                        <div class="custom-control custom-control-sm custom-checkbox notext">
-                                            <input type="checkbox" class="custom-control-input" id="uid1">
-                                            <label class="custom-control-label" for="uid1"></label>
-                                        </div>
-                                    </div>
-                                    <div class="nk-tb-col">
-                                        <div class="user-card">
-                                            <div class="user-avatar xs bg-primary">
-                                                <span>ABC</span>
-                                            </div>
-                                            <div class="user-name">
-                                                <span class="tb-lead">PT. ABC</span>
+                                @foreach (var item in Model)
+                                {
+                                    var checkboxId = $"chk_{item.Id}";
+                                    <div class="nk-tb-item">
+                                        <div class="nk-tb-col nk-tb-col-check">
+                                            <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                <input type="checkbox" class="custom-control-input" id="@checkboxId">
+                                                <label class="custom-control-label" for="@checkboxId"></label>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="nk-tb-col tb-col-md">
-                                        <span>Customer</span>
-                                    </div>
-                                    <div class="nk-tb-col">
-                                        <span class="tb-status text-success">Active</span>
-                                    </div>
-                                    <div class="nk-tb-col nk-tb-col-tools">
-                                        <ul class="nk-tb-actions gx-2">
-                                            <li>
-                                                <div class="drodown">
-                                                    <a href="#" class="btn btn-sm btn-icon btn-trigger dropdown-toggle" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <ul class="link-list-opt no-bdr">
-                                                            <li><a href="#"><em class="icon ni ni-eye"></em><span>Edit</span></a></li>
-                                                            <li><a href="#"><em class="icon ni ni-repeat"></em><span>Delete</span></a></li>
-                                                        </ul>
-                                                    </div>
+
+                                        <div class="nk-tb-col">
+                                            <div class="user-card">
+                                                <div class="user-avatar xs bg-primary">
+                                                    <span>ABC</span>
                                                 </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div><!-- .nk-tb-item -->
+                                                <div class="user-name">
+                                                    <span class="tb-lead">@item.Name</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="nk-tb-col tb-col-md">
+                                            <span>@item.Code</span>
+                                        </div>
+                                        <div class="nk-tb-col">
+                                            <span class="tb-status text-success">@item.Active</span>
+                                        </div>
+                                        <div class="nk-tb-col nk-tb-col-tools">
+                                            <ul class="nk-tb-actions gx-2">
+                                                <li>
+                                                    <div class="drodown">
+                                                        <a href="#" class="btn btn-sm btn-icon btn-trigger dropdown-toggle" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <ul class="link-list-opt no-bdr">
+                                                                <li><a asp-area="Admin" asp-controller="Company" asp-action="UpdateCompany" data-id="@item.Id" asp-route-id="@item.Id"><em class="icon ni ni-eye"></em><span>Edit</span></a></li>
+                                                                <li><a asp-area="Admin" asp-controller="Company" asp-action="DeleteCompany" data-id="@item.Id" asp-route-id="@item.Id"><em class="icon ni ni-repeat"></em><span>Delete</span></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!-- .nk-tb-item -->
+                                }
                             </div><!-- .nk-tb-list -->
                         </div><!-- .card-inner -->
                         <div class="card-inner">

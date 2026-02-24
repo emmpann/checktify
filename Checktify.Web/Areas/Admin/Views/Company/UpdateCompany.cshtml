@@ -1,9 +1,10 @@
-﻿@model CompanyAddVM
+﻿@model CompanyUpdateVM
 
 @{
-    ViewData["Title"] = "AddCompany";
+    ViewData["Title"] = "UpdateCompany";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="container-fluid">
     <div class="nk-content-inner">
@@ -11,16 +12,31 @@
             <div class="nk-block-head nk-block-head-sm">
                 <div class="nk-block-between">
                     <div class="nk-block-head-content">
-                        <h3 class="nk-block-title page-title">Add Company</h3>
-                    </div><!-- .nk-block-head-content -->
-                </div><!-- .nk-block-between -->
-            </div><!-- .nk-block-head -->
+                        <h3 class="nk-block-title page-title">Update Company</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-head-content">
+                    <nav>
+                        <ul class="breadcrumb breadcrumb-arrow">
+                            <li class="breadcrumb-item">
+                                <a asp-area="Admin" asp-controller="Company" asp-action="GetCompanyList">Company</a>
+                            </li>
+                            <li class="breadcrumb-item active">Update Company</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
             <div class="nk-block">
                 <div class="card card-bordered">
                     <div class="card-inner">
 
-                        <form asp-area="Admin" asp-controller="Company" asp-action="AddCompany" method="post">
+                        <form asp-area="Admin" asp-controller="Company" asp-action="UpdateCompany" method="post">
 
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="RowVersion" />
                             <div class="form-group">
                                 <label asp-for="Name" class="form-label">Name</label>
                                 <div asp-for="Name" class="form-control-wrap">

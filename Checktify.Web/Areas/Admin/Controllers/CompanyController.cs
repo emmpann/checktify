@@ -14,9 +14,9 @@ namespace Checktify.Web.Areas.Admin.Controllers
             _companyService = companyService;
         }
 
-        public IActionResult GetCompanyList()
+        public async Task<IActionResult> GetCompanyList()
         {
-            var companies = _companyService.GetAllAsync();
+            var companies = await _companyService.GetAllAsync();
             return View(companies);
         }
 
@@ -30,11 +30,11 @@ namespace Checktify.Web.Areas.Admin.Controllers
         public async Task<IActionResult> AddCompany(CompanyAddVM request)
         {
             await _companyService.AddCompanyAsync(request);
-            return RedirectToAction("GetCompanyList", "CompanyController", new { Area = ("Admin") });
+            return RedirectToAction("GetCompanyList", "Company", new { Area = ("Admin") });
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCompanyById(Guid id)
+        public async Task<IActionResult> UpdateCompany(Guid id)
         {
             var company = await _companyService.GetCompanyById(id);
             return View(company);
@@ -44,13 +44,13 @@ namespace Checktify.Web.Areas.Admin.Controllers
         public async Task<IActionResult> UpdateCompany(CompanyUpdateVM request)
         {
             await _companyService.UpdateCompanyAsync(request);
-            return RedirectToAction("GetCompanyList", "CompanyController", new { Area = ("Admin") });
+            return RedirectToAction("GetCompanyList", "Company", new { Area = ("Admin") });
         }
 
         public async Task<IActionResult> DeleteCompany(Guid id)
         {
             await _companyService.DeleteCompanyAsync(id);
-            return RedirectToAction("GetCompanyList", "CompanyController", new { Area = ("Admin") });
+            return RedirectToAction("GetCompanyList", "Company", new { Area = ("Admin") });
         }
     }
 }
