@@ -16,7 +16,7 @@ namespace Checktify.Service.Extensions.Identity
                 opt.Password.RequiredLength = 6; ;
                 opt.Password.RequireNonAlphanumeric = true;
                 opt.Password.RequiredUniqueChars = 1;
-                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(60);
             })
                 .AddRoleManager<RoleManager<Role>>()
                 .AddEntityFrameworkStores<AppDbContext>()

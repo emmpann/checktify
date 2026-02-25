@@ -85,8 +85,17 @@ namespace Checktify.Web.Controllers
             {
                 return Redirect(returnUrl!);
             }
+            
+            if(logInResult.IsLockedOut)
+            {
+                ViewBag.Result = "LockedOut";
+                ModelState.AddModelErrorsList(new List<String> { "Your account is locked out for 60 seconds!" });
+                return View();
+            }
 
-
+            ViewBag.Result = "FailedAttempt";
+            ModelState.AddModelErrorsList(new List<String> { $"Email or Password is wrong! Failed attempt{ await _userManager.GetAccessFailedCountAsync(hasUser)}" });
+            return View();
         }
     }
 }
