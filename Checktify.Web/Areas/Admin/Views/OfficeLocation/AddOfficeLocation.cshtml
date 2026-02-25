@@ -4,6 +4,59 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // Default Jakarta
+        let lat = parseFloat(document.getElementById("Latitude").value) || -6.200000;
+        let lng = parseFloat(document.getElementById("Longitude").value) || 106.816666;
+
+        // Init map
+        var map = L.map('map').setView([lat, lng], 13);
+
+        // Load OSM Tile
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Marker
+        var marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+
+        // Set awal text
+        updateText(lat, lng);
+
+        // Klik map
+        map.on('click', function (e) {
+            setLocation(e.latlng.lat, e.latlng.lng);
+        });
+
+        // Drag marker
+        marker.on('dragend', function (e) {
+            var position = marker.getLatLng();
+            setLocation(position.lat, position.lng);
+        });
+
+        function setLocation(lat, lng) {
+            marker.setLatLng([lat, lng]);
+
+            document.getElementById("Latitude").value = lat.toFixed(8);
+            document.getElementById("Longitude").value = lng.toFixed(8);
+
+            document.getElementById("LatitudeDisplay").value = lat.toFixed(6);
+            document.getElementById("LongitudeDisplay").value = lng.toFixed(6);
+        }
+
+        function updateText(lat, lng) {
+            document.getElementById("latText").innerText = lat.toFixed(6);
+            document.getElementById("lngText").innerText = lng.toFixed(6);
+        }
+
+    });
+</script>
+
+
 <div class="container-fluid">
     <div class="nk-content-inner">
         <div class="nk-content-body">
@@ -47,23 +100,61 @@
                                 </div>
                             </div>
 
-                            <select asp-for="CompanyId"
-                                    asp-items="ViewBag.Companies"
-                                    class="form-control">
-                                <option value="">-- Select Company --</option>
-                            </select>
-
                             <div class="form-group">
-                                <label class="form-label" asp-for="Longitude">Longitude</label>
+                                <label class="form-label" asp-for="Company">Company</label>
                                 <div class="form-control-wrap">
-                                    <input asp-for="Longitude" type="text" class="form-control">
+                                    <select asp-for="CompanyId"
+                                            asp-items="ViewBag.Companies"
+                                            class="form-control">
+                                        <option value="">-- Select Company --</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label" asp-for="Latitude">Latitude</label>
-                                <div class="form-control-wrap">
-                                    <input asp-for="Latitude" type="text" class="form-control">
+                                <div class="row">
+
+                                    <!-- LATITUDE -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Latitude</label>
+
+                                        <!-- Hidden untuk submit -->
+                                        <input asp-for="Latitude" type="hidden" id="Latitude" />
+
+                                        <!-- Visible readonly -->
+                                        <input type="text"
+                                               id="LatitudeDisplay"
+                                               class="form-control bg-light"
+                                               readonly />
+                                    </div>
+
+                                    <!-- LONGITUDE -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Longitude</label>
+
+                                        <!-- Hidden untuk submit -->
+                                        <input asp-for="Longitude" type="hidden" id="Longitude" />
+
+                                        <!-- Visible readonly -->
+                                        <input type="text"
+                                               id="LongitudeDisplay"
+                                               class="form-control bg-light"
+                                               readonly />
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="form-label">Select Location</label>
+                                <div id="map" style="height:400px; width:100%; border-radius:8px;"></div>
+
+                                <div class="mt-2">
+                                    <small>
+                                        Latitude: <span id="latText"></span> |
+                                        Longitude: <span id="lngText"></span>
+                                    </small>
                                 </div>
                             </div>
 

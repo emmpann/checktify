@@ -1,0 +1,63 @@
+﻿@model RoleUpdateVM
+@{
+    ViewData["Title"] = "UpdateRole";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Update Role</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-head-content">
+                    <nav>
+                        <ul class="breadcrumb breadcrumb-arrow">
+                            <li class="breadcrumb-item">
+                                <a asp-area="Admin" asp-controller="Role" asp-action="GetRoleList">Role</a>
+                            </li>
+                            <li class="breadcrumb-item active">Update Role</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+
+                        <form asp-area="Admin" asp-controller="Role" asp-action="UpdateRole" method="post">
+
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="RowVersion" />
+                            <div class="form-group">
+                                <label asp-for="Name" class="form-label">Name</label>
+                                <div asp-for="Name" class="form-control-wrap">
+                                    <input asp-for="Name" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" asp-for="Code">Code</label>
+                                <div class="form-control-wrap">
+                                    <input asp-for="Code" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-primary">Save</button>
+                            </div>
+                        </form>
+
+                        <!--row-->
+                    </div><!-- .card-inner-group -->
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>

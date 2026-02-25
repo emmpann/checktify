@@ -1,4 +1,5 @@
 ﻿using Checktify.Core.Entities;
+using Checktify.Entity.Identity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Checktify.Entity.WebApplication.Entities
     {
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
         public DateTime CheckInTime { get; set; }
         public DateTime CheckOutTime { get; set; }

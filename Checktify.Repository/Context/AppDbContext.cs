@@ -1,4 +1,6 @@
-﻿using Checktify.Entity.WebApplication.Entities;
+﻿using Checktify.Entity.Identity.Entities;
+using Checktify.Entity.WebApplication.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,14 +9,14 @@ using System.Text;
 
 namespace Checktify.Repository.Context
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User, Role, string>
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
 
         public AppDbContext()
-        { 
+        {
         }
 
         public DbSet<Company> Companies { get; set; }

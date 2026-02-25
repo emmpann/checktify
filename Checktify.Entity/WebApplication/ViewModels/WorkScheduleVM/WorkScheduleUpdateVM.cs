@@ -13,15 +13,12 @@ namespace Checktify.Entity.WebApplication.ViewModels.WorkScheduleVM
         public virtual string? UpdatedDate { get; set; }
         public virtual byte[] RowVersion { get; set; }
 
-        public Guid CompanyId { get; set; }
-        public CompanyUpdateVM Company { get; set; }
-        public string Username { get; set; }
+        public Guid OfficeLocationId { get; set; }
+        public OfficeLocation OfficeLocation { get; set; } = null!;
         public string Name { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
-        public string WorkSchedule { get; set; }
-        public Guid RoleId { get; set; }
-        public RoleListVM Role { get; set; }
+        public string Code { get; set; }
+        public bool Active { get; set; }
+        public TimeSpan CheckInTime { get; set; }
+        public TimeSpan CheckOutTime { get; set; }
     }
 }

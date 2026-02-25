@@ -1,4 +1,5 @@
-﻿using Checktify.Entity.WebApplication.Entities;
+﻿using Checktify.Entity.Identity.Entities;
+using Checktify.Entity.WebApplication.Entities;
 using Checktify.Entity.WebApplication.ViewModels.OfficeLocationVM;
 using System;
 using System.Collections.Generic;

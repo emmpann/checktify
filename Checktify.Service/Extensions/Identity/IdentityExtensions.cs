@@ -1,0 +1,40 @@
+﻿using Checktify.Entity.Identity.Entities;
+using Checktify.Repository.Context;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Checktify.Service.Extensions.Identity
+{
+    public static class IdentityExtensions
+    {
+        public static IServiceCollection LoadIdentityExtensions(this IServiceCollection services)
+        {
+
+            services.AddIdentity<User, Role>(opt =>
+            {
+                opt.Password.RequiredLength = 6; ;
+                opt.Password.RequireNonAlphanumeric = true;
+                opt.Password.RequiredUniqueChars = 1;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
+            })
+                .AddRoleManager<RoleManager<Role>>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                var newCookie = new CookieBuilder();
+                newCookie.Name = "ChecktifyCookie";
+
+                opt.LoginPath = new PathString("/Authentication/Login");
+                opt.LogoutPath = new PathString("/Authentication/Logout");
+                opt.AccessDeniedPath = new PathString("/Authentication/AccessDenied");
+                opt.Cookie = newCookie;
+                opt.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+            });
+
+            return services;
+        }
+    }
+}
