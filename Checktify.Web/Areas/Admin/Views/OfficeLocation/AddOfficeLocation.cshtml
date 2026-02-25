@@ -1,7 +1,6 @@
-﻿@model CompanyAddVM
-
+﻿@model OfficeLocationAddVM
 @{
-    ViewData["Title"] = "AddCompany";
+    ViewData["Title"] = "AddOfficeLocation";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +10,7 @@
             <div class="nk-block-head nk-block-head-sm">
                 <div class="nk-block-between">
                     <div class="nk-block-head-content">
-                        <h3 class="nk-block-title page-title">Update Company</h3>
+                        <h3 class="nk-block-title page-title">Add Office Location</h3>
                     </div>
                 </div>
             </div>
@@ -21,9 +20,9 @@
                     <nav>
                         <ul class="breadcrumb breadcrumb-arrow">
                             <li class="breadcrumb-item">
-                                <a asp-area="Admin" asp-controller="Company" asp-action="GetCompanyList">Company</a>
+                                <a asp-area="Admin" asp-controller="OfficeLocation" asp-action="GetOfficeLocationList">Office Location</a>
                             </li>
-                            <li class="breadcrumb-item active">Add Company</li>
+                            <li class="breadcrumb-item active">Add Office Location</li>
                         </ul>
                     </nav>
                 </div>
@@ -32,7 +31,7 @@
                 <div class="card card-bordered">
                     <div class="card-inner">
 
-                        <form asp-area="Admin" asp-controller="Company" asp-action="AddCompany" method="post">
+                        <form asp-area="Admin" asp-controller="OfficeLocation" asp-action="AddOfficeLocation" method="post">
 
                             <div class="form-group">
                                 <label asp-for="Name" class="form-label">Name</label>
@@ -45,6 +44,26 @@
                                 <label class="form-label" asp-for="Code">Code</label>
                                 <div class="form-control-wrap">
                                     <input asp-for="Code" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <select asp-for="CompanyId"
+                                    asp-items="ViewBag.Companies"
+                                    class="form-control">
+                                <option value="">-- Select Company --</option>
+                            </select>
+
+                            <div class="form-group">
+                                <label class="form-label" asp-for="Longitude">Longitude</label>
+                                <div class="form-control-wrap">
+                                    <input asp-for="Longitude" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" asp-for="Latitude">Latitude</label>
+                                <div class="form-control-wrap">
+                                    <input asp-for="Latitude" type="text" class="form-control">
                                 </div>
                             </div>
 
