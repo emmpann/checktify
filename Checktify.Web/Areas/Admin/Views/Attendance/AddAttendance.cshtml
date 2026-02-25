@@ -1,0 +1,85 @@
+﻿@model AttendanceAddVM
+@{
+    ViewData["Title"] = "AddAttendance";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+
+            <!-- Header Page -->
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Attendance</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breadcrumb -->
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-head-content">
+                    <nav>
+                        <ul class="breadcrumb breadcrumb-arrow">
+                            <li class="breadcrumb-item">
+                                <a asp-area="Admin" asp-controller="Attendance" asp-action="Index">Attendance</a>
+                            </li>
+                            <li class="breadcrumb-item active">Check In / Check Out</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Attendance Card -->
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">Check In Time</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control"
+                                       value="@(Model.CheckInTime?.ToString("HH:mm:ss") ?? "- Not checked in -")" readonly />
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">Check Out Time</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control"
+                                       value="@(Model.CheckOutTime?.ToString("HH:mm:ss") ?? "- Not checked out -")" readonly />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            @if (Model.CheckInTime == null)
+                            {
+                                <form asp-action="CheckIn" method="post">
+                                    <button type="submit" class="btn btn-success btn-lg">Check In</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <button class="btn btn-secondary btn-lg" disabled>Check In</button>
+                            }
+
+                            @if (Model.CheckInTime != null && Model.CheckOutTime == null)
+                            {
+                                <form asp-action="CheckOut" method="post">
+                                    <button type="submit" class="btn btn-primary btn-lg">Check Out</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <button class="btn btn-secondary btn-lg" disabled>Check Out</button>
+                            }
+                        </div>
+
+                    </div><!-- .card-inner -->
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+
+        </div>
+    </div>
+</div>
