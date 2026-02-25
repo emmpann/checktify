@@ -48,7 +48,7 @@
                                         <button type="button" class="close" data-bs-dismiss="alert"></button>
                                     </div>
                                 }
-                                <form asp-controller="Authentication" asp-action="LogIn">
+                                <form asp-controller="Authentication" asp-action="LogIn" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"] method="post">
                                     <div class="form-group">
                                         <div class="form-label-group">
                                             <label asp-for="Email" class="form-label" for="default-01">Email</label>
