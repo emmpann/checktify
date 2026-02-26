@@ -1,14 +1,17 @@
 ﻿using Checktify.Entity.Identity.Entities;
+using Checktify.Entity.Identity.ViewModels;
 using Checktify.Repository.Context;
+using Checktify.Service.Helpers.Identity.EmailHelper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Checktify.Service.Extensions.Identity
 {
     public static class IdentityExtensions
     {
-        public static IServiceCollection LoadIdentityExtensions(this IServiceCollection services)
+        public static IServiceCollection LoadIdentityExtensions(this IServiceCollection services, IConfiguration config)
         {
 
             services.AddIdentity<User, Role>(opt =>
@@ -33,6 +36,10 @@ namespace Checktify.Service.Extensions.Identity
                 opt.Cookie = newCookie;
                 opt.ExpireTimeSpan = TimeSpan.FromMinutes(60);
             });
+
+            services.AddScoped<IEmailSendMethod, EmailSendMethod>();
+
+            services.Configure<GmailInformationsVM>(config.GetSection("EmailSettings"));
 
             return services;
         }

@@ -2,6 +2,7 @@
 using Checktify.Service.FluentValidation.WebApplication.CompanyValidation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -9,9 +10,9 @@ namespace Checktify.Service.Extensions
 {
     public static class ServiceExtensions
     {
-        public static IServiceCollection LoadServiceExtensions(this IServiceCollection services)
+        public static IServiceCollection LoadServiceExtensions(this IServiceCollection services, IConfiguration config)
         {
-            services.LoadIdentityExtensions();
+            services.LoadIdentityExtensions(config);
 
             services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly());
 

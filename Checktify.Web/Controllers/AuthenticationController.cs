@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Checktify.Entity.Identity.Entities;
 using Checktify.Entity.Identity.ViewModels;
+using Checktify.Service.Helpers.Identity;
+using Checktify.Service.Helpers.Identity.EmailHelper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Checktify.Service.Helpers.Identity;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace Checktify.Web.Controllers
 {
@@ -15,15 +17,19 @@ namespace Checktify.Web.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly IValidator<SignUpVM> _signUpValidator;
         private readonly IValidator<LogInVM> _logInValidator;
+        private readonly IValidator<ForgotPasswordVM> _forgotPasswordValidator;
         private readonly IMapper _iMapper;
+        private readonly IEmailSendMethod _emailSendMethod;
 
-        public AuthenticationController(UserManager<User> userManager, IValidator<SignUpVM> signUpValidator, IMapper iMapper, SignInManager<User> signInManager, IValidator<LogInVM> logInValidator)
+        public AuthenticationController(UserManager<User> userManager, IValidator<SignUpVM> signUpValidator, IMapper iMapper, SignInManager<User> signInManager, IValidator<LogInVM> logInValidator, IValidator<ForgotPasswordVM> forgotPasswordValidator, IEmailSendMethod emailSendMethod)
         {
             _userManager = userManager;
             _signUpValidator = signUpValidator;
             _iMapper = iMapper;
             _signInManager = signInManager;
             _logInValidator = logInValidator;
+            _forgotPasswordValidator = forgotPasswordValidator;
+            _emailSendMethod = emailSendMethod;
         }
 
         [HttpGet]
@@ -95,6 +101,36 @@ namespace Checktify.Web.Controllers
             ViewBag.Result = "FailedAttempt";
             ModelState.AddModelErrorsList(new List<String> { $"Email or Password is wrong! Failed attempt{ await _userManager.GetAccessFailedCountAsync(hasUser)}" });
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM request)
+        {
+            var validation = await _forgotPasswordValidator.ValidateAsync(request);
+            if (!validation.IsValid)
+            {
+                validation.AddToModelState(this.ModelState);
+                return View();
+            }
+
+            var hasUser = await _userManager.FindByEmailAsync(request.Email);
+            if (hasUser == null)
+            {
+                ViewBag.Result = "UserDoesNotExist";
+                ModelState.AddModelErrorsList(new List<String> { "Email is not registered!" });
+                return View();
+            }
+            
+            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(hasUser);
+            var passwordResetLink = Url.Action("ResetPassword", "Authentication", new { UserId = hasUser.Id, Token = resetToken, HttpContext.Request.Scheme });
+
+            await _emailSendMethod.SendPasswordResetLinkWithToken(passwordResetLink!, request.Email);
+            return RedirectToAction("LogIn", "Authentication");
         }
     }
 }

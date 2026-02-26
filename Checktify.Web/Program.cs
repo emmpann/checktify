@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.LoadRepositoryExtenstions(builder.Configuration);
-builder.Services.LoadServiceExtensions();
+builder.Services.LoadServiceExtensions(builder.Configuration);
 
 var app = builder.Build();
 
