@@ -67,6 +67,11 @@
                             @if (Model.CheckInTime != null && Model.CheckOutTime == null)
                             {
                                 <form asp-action="CheckOut" method="post">
+                                    @* send the existing attendance id and related fields so controller can update *@
+                                    <input type="hidden" name="Id" value="@(Model.Id ?? Guid.Empty)" />
+                                    <input type="hidden" name="CompanyId" value="@Model.CompanyId" />
+                                    <input type="hidden" name="CheckInOfficeLocationId" value="@(Model.CheckInOfficeLocationId ?? Guid.Empty)" />
+                                    <input type="hidden" name="CheckInTime" value="@(Model.CheckInTime?.ToString("o") ?? String.Empty)" />
                                     <button type="submit" class="btn btn-primary btn-lg">Check Out</button>
                                 </form>
                             }

@@ -30,19 +30,20 @@ namespace Checktify.Web.Areas.Admin.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             var attendances = await _attendanceService.GetAllAsync();
-            var workSchedules = await _workScheduleService.GetAllAsync();
-            var officeLocations = await _officeLocationService.GetAllAsync();
-
-            var a = attendances.Include
 
 
             return View(attendances);
         }
 
         [HttpGet]
-        public IActionResult AddAttendance()
+        public async Task<IActionResult> AddAttendance()
         {
-            return View(new AttendanceAddVM()); 
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return View(new AttendanceAddVM());
+
+            var open = await _attendanceService.GetOpenAttendanceByUserIdAsync(user.Id);
+            return View(open ?? new AttendanceAddVM());
         }
 
         [HttpPost]

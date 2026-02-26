@@ -1,0 +1,68 @@
+@model Checktify.Entity.WebApplication.ViewModels.UserVM.UserEditVM
+@{
+    ViewData["Title"] = "Edit User";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Configure User</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <form asp-action="Edit" method="post">
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="form-group mb-3">
+                                <label class="form-label">User</label>
+                                <div class="form-control-wrap">
+                                    <input class="form-control" asp-for="UserName" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label">Email</label>
+                                <div class="form-control-wrap">
+                                    <input class="form-control" asp-for="Email" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label">Company</label>
+                                <div class="form-control-wrap">
+                                    <select class="form-select" asp-for="CompanyId" asp-items="(SelectList)ViewBag.Companies">
+                                        <option value="">-- Select Company --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label">Work Schedule</label>
+                                <div class="form-control-wrap">
+                                    <select class="form-select" asp-for="WorkScheduleId" asp-items="(SelectList)ViewBag.WorkSchedules">
+                                        <option value="">-- Select Work Schedule --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

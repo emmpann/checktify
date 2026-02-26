@@ -16,12 +16,20 @@ namespace Checktify.Entity.WebApplication.ViewModels.AttendanceVM
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
         public string UserId { get; set; }
+        // Simple user display field (mapped from User.UserName)
+        public string UserName { get; set; }
         public User User { get; set; }
         public DateTime? CheckInTime { get; set; }
         public DateTime? CheckOutTime { get; set; }
-        public Guid CheckInOfficeLocationId { get; set; }
+        // Office location display names
+        public Guid? CheckInOfficeLocationId { get; set; }
         public OfficeLocationListVM CheckInOfficeLocation { get; set; }
-        public Guid CheckOutOfficeLocationId { get; set; }
+        public string CheckInOfficeLocationName { get; set; }
+        public Guid? CheckOutOfficeLocationId { get; set; }
         public OfficeLocationListVM CheckOutOfficeLocation { get; set; }
+        public string CheckOutOfficeLocationName { get; set; }
+        // Work schedule expected checkout time (TimeSpan from WorkSchedule)
+        public TimeSpan? WorkScheduleCheckOutTime { get; set; }
+        public string WorkScheduleName { get; set; }
     }
 }

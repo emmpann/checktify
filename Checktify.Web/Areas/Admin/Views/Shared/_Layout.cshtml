@@ -39,6 +39,12 @@
                     <div class="nk-sidebar-content">
                         <div class="nk-sidebar-menu" data-simplebar>
                             <ul class="nk-menu">
+                                <li class="nk-menu-item">
+                                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><i class="bi bi-columns-gap"></i></span>
+                                        <span class="nk-menu-text">Dashboard</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
 
                                 <li class="nk-menu-item">
                                     <a asp-area="Admin" asp-controller="Company" asp-action="GetCompanyList" class="nk-menu-link">
@@ -69,7 +75,7 @@
                                 </li><!-- .nk-menu-item -->
 
                                 <li class="nk-menu-item">
-                                    <a asp-area="Admin" asp-controller="User" asp-action="GetUserList" class="nk-menu-link">
+                                    <a asp-area="Admin" asp-controller="User" asp-action="Index" class="nk-menu-link">
                                         <span class="nk-menu-icon"><i class="bi bi-person-badge-fill"></i></span>
                                         <span class="nk-menu-text">Employee</span>
                                     </a>

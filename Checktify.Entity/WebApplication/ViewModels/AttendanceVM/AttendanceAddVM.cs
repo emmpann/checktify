@@ -9,6 +9,7 @@ namespace Checktify.Entity.WebApplication.ViewModels.AttendanceVM
 {
     public class AttendanceAddVM
     {
+        public Guid? Id { get; set; }
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
         public string UserId { get; set; }

@@ -1,15 +1,23 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Checktify.Service.Services.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Checktify.Web.Areas.Admin.Controllers
 {
+    [Authorize]
+    [Area("Admin")]
     public class DashboardController : Controller
     {
-        [Authorize]
-        [Area("Admin")]
-        public IActionResult Index()
+        private readonly IAttendanceService _attendanceService;
+        public DashboardController(IAttendanceService attendanceService)
         {
-            return View();
+            _attendanceService = attendanceService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var attendances = await _attendanceService.GetAllAsync();
+
+            return View(attendances);
         }
     }
 }

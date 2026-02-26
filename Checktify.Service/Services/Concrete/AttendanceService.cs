@@ -31,8 +31,32 @@ namespace Checktify.Service.Services.Concrete
             return attendances;
         }
 
+        public async Task<AttendanceAddVM> GetOpenAttendanceByUserIdAsync(string userId)
+        {
+            var attendance = await _repository.GetAllEntityList()
+                .Where(a => a.UserId == userId && a.CheckInTime != null && a.CheckOutTime == null)
+                .ProjectTo<AttendanceAddVM>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+            return attendance;
+        }
+
         public async Task AddAttendanceAsync(AttendanceAddVM request)
         {
+            // If request contains an Id, update existing attendance (e.g., checkout)
+            if (request.Id.HasValue && request.Id != Guid.Empty)
+            {
+                var existing = await _repository.GetEntityByIdAsync(request.Id.Value);
+                if (existing != null)
+                {
+                    // update fields that might change on checkout
+                    existing.CheckOutTime = request.CheckOutTime ?? existing.CheckOutTime;
+                    existing.CheckOutOfficeLocationId = request.CheckOutOfficeLocationId ?? existing.CheckOutOfficeLocationId;
+                    _repository.UpdateEntity(existing);
+                    await _unitOfWork.CommitAsync();
+                    return;
+                }
+            }
+
             var attendance = _mapper.Map<Attendance>(request);
             await _repository.AddEntityAsync(attendance);
             await _unitOfWork.CommitAsync();

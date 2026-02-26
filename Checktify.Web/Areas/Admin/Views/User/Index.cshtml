@@ -1,0 +1,49 @@
+@model List<Checktify.Entity.Identity.Entities.User>
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Users</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="card-inner-group">
+                        <div class="card-inner nk-tb-list nk-tb-ulist is-compact">
+                            <div class="nk-tb-item nk-tb-head">
+                                <div class="nk-tb-col">User</div>
+                                <div class="nk-tb-col">Email</div>
+                                <div class="nk-tb-col nk-tb-col-tools text-end">Actions</div>
+                            </div>
+
+                            @foreach(var user in Model)
+                            {
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col">
+                                        <span>@user.UserName</span>
+                                    </div>
+                                    <div class="nk-tb-col">
+                                        <span>@user.Email</span>
+                                    </div>
+                                    <div class="nk-tb-col nk-tb-col-tools text-end">
+                                        <a asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-primary">Configure</a>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

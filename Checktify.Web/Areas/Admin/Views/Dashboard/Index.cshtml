@@ -1,8 +1,100 @@
-﻿
+﻿@model List<AttendanceListVM>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <!-- Header -->
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Attendance List</h3>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <a asp-area="Admin" asp-controller="Attendance" asp-action="AddAttendance" class="btn btn-primary">
+                            <em class="icon ni ni-plus"></em> Add Attendance
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-<h1>Dashboard</h1>
+            <!-- Card List -->
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="card-inner-group">
+                        <!-- Table Header -->
+                        <div class="card-inner nk-tb-list nk-tb-ulist is-compact">
+                            <div class="nk-tb-item nk-tb-head">
+                                <div class="nk-tb-col">User</div>
+                                <div class="nk-tb-col tb-col-md">Check In</div>
+                                <div class="nk-tb-col tb-col-md">Check Out</div>
+                                <div class="nk-tb-col tb-col-md">Office Location</div>
+                                <div class="nk-tb-col">Status</div>
+                                <div class="nk-tb-col nk-tb-col-tools text-end">Actions</div>
+                            </div>
 
+                            <!-- Table Rows -->
+                            @foreach (var attendance in Model)
+                            {
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col">
+                                        <span>@(attendance.UserName ?? attendance.User?.UserName ?? "-")</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>@(attendance.CheckInTime != null ? attendance.CheckInTime?.ToString("yyyy-MM-dd HH:mm") : "-")</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>@(attendance.CheckOutTime != null ? attendance.CheckOutTime?.ToString("yyyy-MM-dd HH:mm") : "-")</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>@(attendance.CheckInOfficeLocationName ?? attendance.CheckOutOfficeLocationName ?? attendance.CheckInOfficeLocation?.Name ?? attendance.CheckOutOfficeLocation?.Name ?? "-")</span>
+                                    </div>
+                                    <div class="nk-tb-col">
+                                        @{
+                                            string status;
+                                            if (attendance.CheckOutTime == null)
+                                            {
+                                                status = "In Progress";
+                                            }
+                                            else if (attendance.WorkScheduleCheckOutTime.HasValue && attendance.CheckInTime.HasValue)
+                                            {
+                                                var expected = attendance.CheckInTime.Value.Date + attendance.WorkScheduleCheckOutTime.Value;
+                                                status = attendance.CheckOutTime.Value < expected ? "Early Checkout" : "On Time";
+                                            }
+                                            else
+                                            {
+                                                // fallback when no work schedule
+                                                status = "Completed";
+                                            }
+                                        }
+                                        <span class="tb-status @(status == "Early Checkout" ? "text-danger" : status == "On Time" ? "text-success" : "text-warning")">
+                                            @status
+                                        </span>
+                                    </div>
+                                    <div class="nk-tb-col nk-tb-col-tools">
+                                        <ul class="nk-tb-actions gx-2">
+                                            <li>
+                                                <a asp-area="Admin" asp-controller="Attendance" asp-action="UpdateAttendance" asp-route-id="@attendance.Id" class="btn btn-sm btn-icon btn-trigger">
+                                                    <em class="icon ni ni-edit"></em>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form asp-area="Admin" asp-controller="Attendance" asp-action="DeleteAttendance" asp-route-id="@attendance.Id" method="post" onsubmit="return confirm('Are you sure?');">
+                                                    <button type="submit" class="btn btn-sm btn-icon btn-trigger text-danger">
+                                                        <em class="icon ni ni-trash"></em>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

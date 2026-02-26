@@ -41,16 +41,16 @@
                             {
                                 <div class="nk-tb-item">
                                     <div class="nk-tb-col">
-                                        <span>@attendance.User</span>
+                                        <span>@(attendance.UserName ?? attendance.User?.UserName ?? "-")</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
-                                        <span>@(attendance.CheckInTime != null ? attendance.CheckOutTime?.ToString("yyyy-MM-dd HH:mm") : "-")</span>
+                                        <span>@(attendance.CheckInTime != null ? attendance.CheckInTime?.ToString("yyyy-MM-dd HH:mm") : "-")</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
                                         <span>@(attendance.CheckOutTime != null ? attendance.CheckOutTime?.ToString("yyyy-MM-dd HH:mm") : "-")</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
-                                        <span>@attendance.User.WorkSchedule.Name ?? "-"</span>
+                                        <span>@(attendance.CheckInOfficeLocationName ?? attendance.CheckOutOfficeLocationName ?? attendance.CheckInOfficeLocation?.Name ?? attendance.CheckOutOfficeLocation?.Name ?? "-")</span>
                                     </div>
                                     <div class="nk-tb-col">
                                         <span class="tb-status @(attendance.CheckOutTime != null ? "text-success" : "text-warning")">
