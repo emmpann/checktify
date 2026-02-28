@@ -18,7 +18,7 @@ namespace Checktify.Entity.WebApplication.ViewModels.AttendanceVM
         public string UserId { get; set; }
         // Simple user display field (mapped from User.UserName)
         public string UserName { get; set; }
-        public User User { get; set; }
+        public AppUser User { get; set; }
         public DateTime? CheckInTime { get; set; }
         public DateTime? CheckOutTime { get; set; }
         // Office location display names

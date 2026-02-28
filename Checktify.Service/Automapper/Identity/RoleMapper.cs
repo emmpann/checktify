@@ -8,9 +8,9 @@ namespace Checktify.Service.Automapper.Identity
     {
         public RoleMapper()
         {
-            CreateMap<Role, RoleListVM>().ReverseMap();
-            CreateMap<Role, RoleAddVM>().ReverseMap();
-            CreateMap<Role, RoleUpdateVM>().ReverseMap();
+            CreateMap<AppRole, RoleListVM>().ReverseMap();
+            CreateMap<AppRole, RoleAddVM>().ReverseMap();
+            CreateMap<AppRole, RoleUpdateVM>().ReverseMap();
         }
     }
 }

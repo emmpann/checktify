@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Checktify.Entity.Identity.Entities
 {
-    public class Role : IdentityRole
+    public class AppRole : IdentityRole
     {
     }
 }

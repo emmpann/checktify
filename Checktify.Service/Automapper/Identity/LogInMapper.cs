@@ -11,7 +11,7 @@ namespace Checktify.Service.Automapper.Identity
     {
         public LogInMapper()
         {
-            CreateMap<User, LogInVM>().ReverseMap();
+            CreateMap<AppUser, LogInVM>().ReverseMap();
         }
     }
 }

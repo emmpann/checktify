@@ -9,7 +9,7 @@ namespace Checktify.Service.Automapper.Identity
     {
         public SignUpMapper()
         {
-            CreateMap<User, SignUpVM>().ReverseMap();
+            CreateMap<AppUser, SignUpVM>().ReverseMap();
             //CreateMap<User, UserAddVM>().ReverseMap();
             //CreateMap<User, UserUpdateVM>().ReverseMap();
         }

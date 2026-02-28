@@ -3,6 +3,7 @@ using Checktify.Entity.WebApplication.ViewModels.AttendanceVM;
 using Checktify.Entity.WebApplication.ViewModels.CompanyVM;
 using Checktify.Service.Services.Abstract;
 using Checktify.Service.Services.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,15 +11,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Checktify.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class AttendanceController : Controller
     {
         private readonly IAttendanceService _attendanceService;
         private readonly IWorkScheduleService _workScheduleService;
         private readonly IOfficeLocationService _officeLocationService;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<AppUser> _userManager;
 
-        public AttendanceController(IAttendanceService attendanceService, UserManager<User> userManager, IWorkScheduleService workScheduleService, IOfficeLocationService officeLocationService)
+        public AttendanceController(IAttendanceService attendanceService, UserManager<AppUser> userManager, IWorkScheduleService workScheduleService, IOfficeLocationService officeLocationService)
         {
             _attendanceService = attendanceService;
             _userManager = userManager;

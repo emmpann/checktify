@@ -166,7 +166,7 @@ namespace Checktify.Repository.Migrations
                     b.ToTable("OfficeLocations");
                 });
 
-            modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.Role", b =>
+            modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.AppRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -197,10 +197,10 @@ namespace Checktify.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("AppRole");
                 });
 
-            modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.User", b =>
+            modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -328,7 +328,7 @@ namespace Checktify.Repository.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Checktify.Entity.WebApplication.Entities.User", "User")
+                    b.HasOne("Checktify.Entity.WebApplication.Entities.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -340,7 +340,7 @@ namespace Checktify.Repository.Migrations
 
                     b.Navigation("Company");
 
-                    b.Navigation("User");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.OfficeLocation", b =>
@@ -354,7 +354,7 @@ namespace Checktify.Repository.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.User", b =>
+            modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.AppUser", b =>
                 {
                     b.HasOne("Checktify.Entity.WebApplication.Entities.Company", "Company")
                         .WithMany()
@@ -362,7 +362,7 @@ namespace Checktify.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Checktify.Entity.WebApplication.Entities.Role", "Role")
+                    b.HasOne("Checktify.Entity.WebApplication.Entities.AppRole", "AppRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -370,7 +370,7 @@ namespace Checktify.Repository.Migrations
 
                     b.Navigation("Company");
 
-                    b.Navigation("Role");
+                    b.Navigation("AppRole");
                 });
 
             modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.WorkSchedule", b =>

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Checktify.Entity.Identity.Entities
 {
-    public class User : IdentityUser
+    public class AppUser : IdentityUser
     {
         public Guid? CompanyId { get; set; }
         public Company? Company { get; set; }

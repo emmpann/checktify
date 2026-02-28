@@ -16,7 +16,7 @@ namespace Checktify.Entity.WebApplication.ViewModels.AttendanceVM
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
         public string UserId { get; set; }
-        public User User { get; set; }
+        public AppUser User { get; set; }
         public DateTime CheckInTime { get; set; }
         public DateTime CheckOutTime { get; set; }
         public Guid CheckInOfficeLocationId { get; set; }

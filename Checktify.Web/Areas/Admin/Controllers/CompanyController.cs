@@ -1,9 +1,11 @@
 ﻿using Checktify.Entity.WebApplication.ViewModels.CompanyVM;
 using Checktify.Service.Services.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Checktify.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class CompanyController : Controller
     {

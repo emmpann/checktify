@@ -19,7 +19,7 @@ namespace Checktify.Repository.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "AppRole");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserId",
@@ -273,7 +273,7 @@ namespace Checktify.Repository.Migrations
                 oldType: "nvarchar(450)");
 
             migrationBuilder.CreateTable(
-                name: "Role",
+                name: "AppRole",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -317,14 +317,14 @@ namespace Checktify.Repository.Migrations
                     table.ForeignKey(
                         name: "FK_Users_Role_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Role",
+                        principalTable: "AppRole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Role_Code",
-                table: "Role",
+                table: "AppRole",
                 column: "Code",
                 unique: true);
 

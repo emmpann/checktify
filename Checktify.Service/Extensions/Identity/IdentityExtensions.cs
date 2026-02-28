@@ -14,14 +14,14 @@ namespace Checktify.Service.Extensions.Identity
         public static IServiceCollection LoadIdentityExtensions(this IServiceCollection services, IConfiguration config)
         {
 
-            services.AddIdentity<User, Role>(opt =>
+            services.AddIdentity<AppUser, AppRole>(opt =>
             {
                 opt.Password.RequiredLength = 6; ;
                 opt.Password.RequireNonAlphanumeric = true;
                 opt.Password.RequiredUniqueChars = 1;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(60);
             })
-                .AddRoleManager<RoleManager<Role>>()
+                .AddRoleManager<RoleManager<AppRole>>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -35,6 +35,11 @@ namespace Checktify.Service.Extensions.Identity
                 opt.AccessDeniedPath = new PathString("/Authentication/AccessDenied");
                 opt.Cookie = newCookie;
                 opt.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+            });
+
+            services.Configure<DataProtectionTokenProviderOptions>( opt =>
+            {
+                opt.TokenLifespan = TimeSpan.FromMinutes(15);
             });
 
             services.AddScoped<IEmailSendMethod, EmailSendMethod>();

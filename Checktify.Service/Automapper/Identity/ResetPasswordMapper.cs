@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
 using Checktify.Entity.Identity.Entities;
-using Checktify.Entity.Identity.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Checktify.Service.Automapper.Identity
 {
-    public class ForgotPasswordMapper : Profile
+    public class ResetPasswordMapper : Profile
     {
-        public ForgotPasswordMapper()
+        public ResetPasswordMapper()
         {
-            CreateMap<AppUser, ForgotPasswordVM>().ReverseMap();
+            CreateMap<AppUser, ResetPasswordMapper>().ReverseMap();
         }
     }
 }

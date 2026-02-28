@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace Checktify.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
     [Authorize]
+    [Area("Admin")]
     public class UserController : Controller
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly ICompanyService _companyService;
         private readonly IWorkScheduleService _workScheduleService;
 
-        public UserController(UserManager<User> userManager, ICompanyService companyService, IWorkScheduleService workScheduleService)
+        public UserController(UserManager<AppUser> userManager, ICompanyService companyService, IWorkScheduleService workScheduleService)
         {
             _userManager = userManager;
             _companyService = companyService;

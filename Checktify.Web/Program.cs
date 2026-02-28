@@ -28,7 +28,7 @@ app.MapStaticAssets();
 #pragma warning disable ASP0014
 app.UseEndpoints(endpoint =>
 {
-    // Route root URL to Admin area dashboard
+     //Route root URL to Admin area dashboard
     endpoint.MapControllerRoute(
         name: "root",
         pattern: "",
@@ -39,6 +39,11 @@ app.UseEndpoints(endpoint =>
         name: "Admin",
         areaName: "Admin",
         pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
+
+    endpoint.MapAreaControllerRoute(
+        name: "User",
+        areaName: "User",
+        pattern: "User/{controller=Dashboard}/{action=Index}/{id?}");
 
     endpoint.MapControllerRoute(
         name: "default",

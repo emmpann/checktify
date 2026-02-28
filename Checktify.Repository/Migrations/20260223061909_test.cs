@@ -29,7 +29,7 @@ namespace Checktify.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
+                name: "AppRole",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -123,7 +123,7 @@ namespace Checktify.Repository.Migrations
                     table.ForeignKey(
                         name: "FK_Users_Role_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Role",
+                        principalTable: "AppRole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -238,7 +238,7 @@ namespace Checktify.Repository.Migrations
                 name: "Companies");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "AppRole");
         }
     }
 }

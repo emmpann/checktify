@@ -34,7 +34,7 @@ namespace Checktify.Repository.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "Code",
-                table: "Role",
+                table: "AppRole",
                 type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
@@ -56,7 +56,7 @@ namespace Checktify.Repository.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Role_Code",
-                table: "Role",
+                table: "AppRole",
                 column: "Code",
                 unique: true);
 
@@ -88,7 +88,7 @@ namespace Checktify.Repository.Migrations
 
             migrationBuilder.DropIndex(
                 name: "IX_Role_Code",
-                table: "Role");
+                table: "AppRole");
 
             migrationBuilder.DropIndex(
                 name: "IX_OfficeLocations_Code",
@@ -114,7 +114,7 @@ namespace Checktify.Repository.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "Code",
-                table: "Role",
+                table: "AppRole",
                 type: "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string),

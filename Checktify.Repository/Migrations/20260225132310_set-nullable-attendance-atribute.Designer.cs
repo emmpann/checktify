@@ -25,7 +25,7 @@ namespace Checktify.Repository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Checktify.Entity.Identity.Entities.Role", b =>
+            modelBuilder.Entity("Checktify.Entity.Identity.Entities.AppRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -52,7 +52,7 @@ namespace Checktify.Repository.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Checktify.Entity.Identity.Entities.User", b =>
+            modelBuilder.Entity("Checktify.Entity.Identity.Entities.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -429,7 +429,7 @@ namespace Checktify.Repository.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Checktify.Entity.Identity.Entities.User", b =>
+            modelBuilder.Entity("Checktify.Entity.Identity.Entities.AppUser", b =>
                 {
                     b.HasOne("Checktify.Entity.WebApplication.Entities.Company", "Company")
                         .WithMany()
@@ -462,7 +462,7 @@ namespace Checktify.Repository.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Checktify.Entity.Identity.Entities.User", "User")
+                    b.HasOne("Checktify.Entity.Identity.Entities.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -474,7 +474,7 @@ namespace Checktify.Repository.Migrations
 
                     b.Navigation("Company");
 
-                    b.Navigation("User");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.OfficeLocation", b =>
@@ -501,7 +501,7 @@ namespace Checktify.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Checktify.Entity.Identity.Entities.Role", null)
+                    b.HasOne("Checktify.Entity.Identity.Entities.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -510,7 +510,7 @@ namespace Checktify.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Checktify.Entity.Identity.Entities.User", null)
+                    b.HasOne("Checktify.Entity.Identity.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -519,7 +519,7 @@ namespace Checktify.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Checktify.Entity.Identity.Entities.User", null)
+                    b.HasOne("Checktify.Entity.Identity.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -528,13 +528,13 @@ namespace Checktify.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Checktify.Entity.Identity.Entities.Role", null)
+                    b.HasOne("Checktify.Entity.Identity.Entities.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Checktify.Entity.Identity.Entities.User", null)
+                    b.HasOne("Checktify.Entity.Identity.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -543,7 +543,7 @@ namespace Checktify.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Checktify.Entity.Identity.Entities.User", null)
+                    b.HasOne("Checktify.Entity.Identity.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -8,9 +8,9 @@ using System.Text;
 
 namespace Checktify.Repository.Configuration.WebApplication
 {
-    public class RoleConfig : IEntityTypeConfiguration<Role>
+    public class RoleConfig : IEntityTypeConfiguration<AppRole>
     {
-        void IEntityTypeConfiguration<Role>.Configure(EntityTypeBuilder<Role> builder)
+        void IEntityTypeConfiguration<AppRole>.Configure(EntityTypeBuilder<AppRole> builder)
         {
             //builder.Property(x => x.CreatedDate).HasMaxLength(10).IsRequired();
             //builder.Property(x => x.UpdatedDate).HasMaxLength(10);
