@@ -1,0 +1,97 @@
+﻿@model UserEditVM
+@{
+    ViewData["Title"] = "UserEdit";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Result))
+{
+    <div class="alert alert-fill alert-danger alert-dismissible alert-icon">
+        <div asp-validation-summary="All"></div>
+        <button type="button" class="close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">User Setting</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Breadcrumb -->
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-head-content">
+        <nav>
+            <ul class="breadcrumb breadcrumb-arrow">
+                <li class="breadcrumb-item">
+                    <a asp-area="User" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">User Setting</li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<form asp-controller="AuthenticationUser" asp-action="UserEdit" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <div class="form-control-wrap">
+            <label asp-for="Username" class="form-label">Username</label>
+            <input asp-for="Username" type="text" class="form-control form-control-lg" placeholder="Enter your username">
+        </div>
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="form-label">Email</label>
+        <div class="form-control-wrap">
+            <input asp-for="Email" type="text" class="form-control form-control-lg" placeholder="Enter your Email">
+        </div>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+        <div class="form-control-wrap">
+            <input asp-for="PhoneNumber" type="text" class="form-control form-control-lg" placeholder="Enter your Phone Number">
+        </div>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password" class="form-label">Password</label>
+        <div class="form-control-wrap">
+            <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Enter your Password">
+        </div>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NewPassword" class="form-label">Confirm Password</label>
+        <div class="form-control-wrap">
+            <input asp-for="NewPassword" type="password" class="form-control form-control-lg" placeholder="Enter your New Password">
+        </div>
+        <span asp-validation-for="NewPassword" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ConfirmNewPassword" class="form-label">Confirm Password</label>
+        <div class="form-control-wrap">
+            <input asp-for="ConfirmNewPassword" type="password" class="form-control form-control-lg" placeholder="Confirm New Password">
+        </div>
+        <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Photo" class="form-label">Photo</label>
+        <div class="form-control-wrap">
+            <input asp-for="Photo" type="file" class="form-control form-control-lg" placeholder="Photo">
+        </div>
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Save Changes</button>
+    </div>
+</form>

@@ -9,5 +9,7 @@ namespace Checktify.Entity.Identity.Entities
         public Company? Company { get; set; }
         public Guid? WorkScheduleId { get; set; }
         public WorkSchedule? WorkSchedule { get; set; }
+        public string? FileName { get; set; }
+        public string? FileType { get; set; }
     }
 }

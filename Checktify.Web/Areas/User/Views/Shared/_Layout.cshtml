@@ -38,6 +38,9 @@
                 <div class="nk-sidebar-element nk-sidebar-body">
                     <div class="nk-sidebar-content">
                         <div class="nk-sidebar-menu" data-simplebar>
+
+							@await Component.InvokeAsync("Layout", ViewBag.Username);
+
                             <ul class="nk-menu">
                                 <li class="nk-menu-item">
                                     <a asp-area="User" asp-controller="Dashboard" asp-action="Index" class="nk-menu-link">

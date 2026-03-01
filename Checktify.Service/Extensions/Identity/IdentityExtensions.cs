@@ -1,6 +1,7 @@
 ﻿using Checktify.Entity.Identity.Entities;
 using Checktify.Entity.Identity.ViewModels;
 using Checktify.Repository.Context;
+using Checktify.Service.Customization.Identity.ErrorDescriber;
 using Checktify.Service.Helpers.Identity.EmailHelper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +24,8 @@ namespace Checktify.Service.Extensions.Identity
             })
                 .AddRoleManager<RoleManager<AppRole>>()
                 .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddErrorDescriber<LocalizationErrorDescriber>();
 
             services.ConfigureApplicationCookie(opt =>
             {

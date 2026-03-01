@@ -1,5 +1,6 @@
 ﻿using Checktify.Service.Extensions.Identity;
 using Checktify.Service.FluentValidation.WebApplication.CompanyValidation;
+using Checktify.Service.Helpers.Generic.Image;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,7 @@ namespace Checktify.Service.Extensions
 
             services.AddValidatorsFromAssemblyContaining<CompanyAddValidation>();
 
+            services.AddScoped<IImageHelper, ImageHelper>();
             return services;
         }
     }
