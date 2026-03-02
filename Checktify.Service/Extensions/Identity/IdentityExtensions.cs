@@ -2,6 +2,7 @@
 using Checktify.Entity.Identity.ViewModels;
 using Checktify.Repository.Context;
 using Checktify.Service.Customization.Identity.ErrorDescriber;
+using Checktify.Service.Customization.Identity.Validators;
 using Checktify.Service.Helpers.Identity.EmailHelper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -21,11 +22,14 @@ namespace Checktify.Service.Extensions.Identity
                 opt.Password.RequireNonAlphanumeric = true;
                 opt.Password.RequiredUniqueChars = 1;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(60);
+                opt.User.RequireUniqueEmail = true;
             })
                 .AddRoleManager<RoleManager<AppRole>>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders()
-                .AddErrorDescriber<LocalizationErrorDescriber>();
+                .AddErrorDescriber<LocalizationErrorDescriber>()
+                .AddPasswordValidator<CustomPasswordValidator>()
+                .AddUserValidator<CustomUserValidator>();
 
             services.ConfigureApplicationCookie(opt =>
             {

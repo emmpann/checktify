@@ -78,6 +78,9 @@
                                 <div class="form-note-s2 text-center pt-4">
                                     New on our platform? <a asp-controller="Authentication" asp-action="SignUp">Create an account</a>
                                 </div>
+                                <div class="form-note-s2 text-center pt-4">
+                                    Forgot Password? <a asp-controller="Authentication" asp-action="ForgotPassword">Renew your password</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,5 +95,10 @@
     <script src="~/Admin/src/assets/js/bundle.js?ver=3.0.3"></script>
     <script src="~/Admin/src/assets/js/scripts.js?ver=3.0.3"></script>
     <script src="~/Admin/src/assets/js/charts/chart-crm.js?ver=3.0.3"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("NToastNotify")
 </body>
 </html>

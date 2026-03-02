@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Checktify.Service.Services.Abstract
+namespace Checktify.Service.Services.WebApplication.Abstract
 {
     public interface IWorkScheduleService
     {

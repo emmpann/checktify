@@ -1,8 +1,6 @@
 ﻿using Checktify.Entity.Identity.Entities;
 using Checktify.Entity.WebApplication.ViewModels.AttendanceVM;
-using Checktify.Entity.WebApplication.ViewModels.CompanyVM;
-using Checktify.Service.Services.Abstract;
-using Checktify.Service.Services.Concrete;
+using Checktify.Service.Services.WebApplication.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

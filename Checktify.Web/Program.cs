@@ -1,10 +1,18 @@
 using Checktify.Repository.Extensions;
 using Checktify.Service.Extensions;
+using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddNToastNotifyToastr(new ToastrOptions
+{
+    ProgressBar = false,
+    PositionClass = ToastPositions.BottomCenter,
+    PreventDuplicates = true,
+    //CloseButton = true
+});
+
 builder.Services.LoadRepositoryExtenstions(builder.Configuration);
 builder.Services.LoadServiceExtensions(builder.Configuration);
 

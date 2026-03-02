@@ -1,5 +1,5 @@
 ﻿using Checktify.Entity.WebApplication.ViewModels.CompanyVM;
-using Checktify.Service.Services.Abstract;
+using Checktify.Service.Services.WebApplication.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

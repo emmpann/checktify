@@ -1,7 +1,5 @@
-﻿using Checktify.Entity.WebApplication.ViewModels.CompanyVM;
-using Checktify.Entity.WebApplication.ViewModels.OfficeLocationVM;
-using Checktify.Service.Services.Abstract;
-using Checktify.Service.Services.Concrete;
+﻿using Checktify.Entity.WebApplication.ViewModels.OfficeLocationVM;
+using Checktify.Service.Services.WebApplication.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

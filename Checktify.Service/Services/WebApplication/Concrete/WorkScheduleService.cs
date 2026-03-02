@@ -4,10 +4,10 @@ using Checktify.Entity.WebApplication.Entities;
 using Checktify.Entity.WebApplication.ViewModels.WorkScheduleVM;
 using Checktify.Repository.Repositories.Abstract;
 using Checktify.Repository.UnitOfWorks.Abstract;
-using Checktify.Service.Services.Abstract;
+using Checktify.Service.Services.WebApplication.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace Checktify.Service.Services.Concrete
+namespace Checktify.Service.Services.WebApplication.Concrete
 {
     public class WorkScheduleService : IWorkScheduleService
     {

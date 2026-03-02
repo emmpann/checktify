@@ -4,13 +4,13 @@ using Checktify.Entity.WebApplication.Entities;
 using Checktify.Entity.WebApplication.ViewModels.AttendanceVM;
 using Checktify.Repository.Repositories.Abstract;
 using Checktify.Repository.UnitOfWorks.Abstract;
-using Checktify.Service.Services.Abstract;
+using Checktify.Service.Services.WebApplication.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Checktify.Service.Services.Concrete
+namespace Checktify.Service.Services.WebApplication.Concrete
 {
     public class AttendanceService : IAttendanceService
     {

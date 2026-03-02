@@ -35,6 +35,8 @@
 </div>
 
 <form asp-controller="AuthenticationUser" asp-action="UserEdit" method="post" enctype="multipart/form-data">
+    <input asp-for="ConcurencyStamp" type="hidden" />
+
     <div class="form-group">
         <div class="form-control-wrap">
             <label asp-for="Username" class="form-label">Username</label>

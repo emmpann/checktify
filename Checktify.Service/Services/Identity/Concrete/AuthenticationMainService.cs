@@ -2,7 +2,7 @@
 using Checktify.Entity.Identity.Entities;
 using Checktify.Entity.Identity.ViewModels;
 using Checktify.Service.Helpers.Identity.EmailHelper;
-using Checktify.Service.Services.Abstract;
+using Checktify.Service.Services.Identity.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Checktify.Service.Services.Concrete
+namespace Checktify.Service.Services.Identity.Concrete
 {
-    public class AuthenticationCustomService : IAuthenticationCustomService
+    public class AuthenticationMainService : IAuthenticationMainService
     {
         private readonly IEmailSendMethod _emailSendMethod;
         private readonly UserManager<AppUser> _userManager;
 
-        public AuthenticationCustomService(IEmailSendMethod email, UserManager<AppUser> userManager)
+        public AuthenticationMainService(IEmailSendMethod email, UserManager<AppUser> userManager)
         {
             _emailSendMethod = email;
             _userManager = userManager;

@@ -1,6 +1,6 @@
 ﻿using Checktify.Entity.WebApplication.ViewModels.OfficeLocationVM;
 using Checktify.Entity.WebApplication.ViewModels.WorkScheduleVM;
-using Checktify.Service.Services.Abstract;
+using Checktify.Service.Services.WebApplication.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

@@ -3,12 +3,12 @@ using Checktify.Entity.Identity.Entities;
 using Checktify.Entity.Identity.ViewModels;
 using Checktify.Service.Helpers.Identity;
 using Checktify.Service.Helpers.Identity.EmailHelper;
-using Checktify.Service.Services.Abstract;
+using Checktify.Service.Services.Identity.Abstract;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using NToastNotify;
 
 namespace Checktify.Web.Controllers
 {
@@ -21,9 +21,10 @@ namespace Checktify.Web.Controllers
         private readonly IValidator<ForgotPasswordVM> _forgotPasswordValidator;
         private readonly IValidator<ResetPasswordVM> _resetPasswordValidator;
         private readonly IMapper _iMapper;
-        private readonly IAuthenticationCustomService _authenticationCustomService;
+        private readonly IAuthenticationMainService _authenticationCustomService;
+        private readonly IToastNotification _toasty;
 
-        public AuthenticationController(UserManager<AppUser> userManager, IValidator<SignUpVM> signUpValidator, IMapper iMapper, SignInManager<AppUser> signInManager, IValidator<LogInVM> logInValidator, IValidator<ForgotPasswordVM> forgotPasswordValidator, IEmailSendMethod emailSendMethod, IValidator<ResetPasswordVM> resetPasswordValidator, IAuthenticationCustomService authenticationCustomService)
+        public AuthenticationController(UserManager<AppUser> userManager, IValidator<SignUpVM> signUpValidator, IMapper iMapper, SignInManager<AppUser> signInManager, IValidator<LogInVM> logInValidator, IValidator<ForgotPasswordVM> forgotPasswordValidator, IEmailSendMethod emailSendMethod, IValidator<ResetPasswordVM> resetPasswordValidator, IAuthenticationMainService authenticationCustomService, IToastNotification toasty)
         {
             _userManager = userManager;
             _signUpValidator = signUpValidator;
@@ -33,6 +34,7 @@ namespace Checktify.Web.Controllers
             _forgotPasswordValidator = forgotPasswordValidator;
             _resetPasswordValidator = resetPasswordValidator;
             _authenticationCustomService = authenticationCustomService;
+            _toasty = toasty;
         }
 
         [HttpGet]
@@ -60,6 +62,7 @@ namespace Checktify.Web.Controllers
                 return View();
             }
 
+            _toasty.AddSuccessToastMessage("Your account has been created successfully! You can log in now.", new ToastrOptions { Title = "Congratulations" });
             return RedirectToAction("LogIn", "Authentication");
         }
 
@@ -72,7 +75,7 @@ namespace Checktify.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> LogIn(LogInVM request, string? returnUrl = null)
         {
-            returnUrl ??= Url.Action("Index", "Dashboard", new { Area = "Admin" });
+            returnUrl ??= Url.Action("Index", "Dashboard", new { Area = "User" });
             var validation = await _logInValidator.ValidateAsync(request);
             if (!validation.IsValid)
             {
@@ -91,6 +94,7 @@ namespace Checktify.Web.Controllers
             var logInResult = await _signInManager.PasswordSignInAsync(hasUser, request.Password, request.RememberMe, true);
             if (logInResult.Succeeded)
             {
+                _toasty.AddSuccessToastMessage("You have logged in successfully!", new ToastrOptions { Title = "Welcome Back" });
                 return Redirect(returnUrl!);
             }
 
@@ -130,6 +134,8 @@ namespace Checktify.Web.Controllers
                 return View();
             }
 
+            _toasty.AddSuccessToastMessage("If an account with the provided email exists, a password reset link has been sent.", new ToastrOptions { Title = "Check Your Email" });
+
             await _authenticationCustomService.CreateResetCredentialsAndSend(hasUser, HttpContext, Url, request);
             return RedirectToAction("LogIn", "Authentication");
         }
@@ -157,6 +163,7 @@ namespace Checktify.Web.Controllers
 
             if (userId == null || token == null)
             {
+                _toasty.AddErrorToastMessage("An error occurred while processing your request. Please try again.", new ToastrOptions { Title = "Error" });
                 return RedirectToAction("LogIn", "Authentication");
             }
 
@@ -170,6 +177,7 @@ namespace Checktify.Web.Controllers
             var hasUser = await _userManager.FindByIdAsync(userId.ToString()!);
             if (hasUser == null)
             {
+                _toasty.AddErrorToastMessage("An error occurred while processing your request. Please try again.", new ToastrOptions { Title = "Error" });
                 return RedirectToAction("LogIn", "Authentication");
             }
 
@@ -177,6 +185,7 @@ namespace Checktify.Web.Controllers
 
             if (resetPasswordResult.Succeeded)
             {
+                _toasty.AddSuccessToastMessage("Your password has been reset successfully! You can log in now.", new ToastrOptions { Title = "Success" });
                 return RedirectToAction("LogIn", "Authentication");
             }
             else

@@ -2,13 +2,10 @@
 using Checktify.Entity.Identity.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Checktify.Service.Services.Abstract
+namespace Checktify.Service.Services.Identity.Abstract
 {
-    public interface IAuthenticationCustomService
+    public interface IAuthenticationMainService
     {
         Task CreateResetCredentialsAndSend(AppUser user, HttpContext context, IUrlHelper url, ForgotPasswordVM request);
     }
