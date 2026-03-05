@@ -180,7 +180,7 @@ namespace Checktify.Repository.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Attendances");
+                    b.ToTable("Attendances", (string)null);
                 });
 
             modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.Company", b =>
@@ -221,7 +221,7 @@ namespace Checktify.Repository.Migrations
                     b.HasIndex("Code")
                         .IsUnique();
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.OfficeLocation", b =>
@@ -272,7 +272,7 @@ namespace Checktify.Repository.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("OfficeLocations");
+                    b.ToTable("OfficeLocations", (string)null);
                 });
 
             modelBuilder.Entity("Checktify.Entity.WebApplication.Entities.WorkSchedule", b =>
@@ -323,7 +323,7 @@ namespace Checktify.Repository.Migrations
 
                     b.HasIndex("OfficeLocationId");
 
-                    b.ToTable("WorkSchedules");
+                    b.ToTable("WorkSchedules", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

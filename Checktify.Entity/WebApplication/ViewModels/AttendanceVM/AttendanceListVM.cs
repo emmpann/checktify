@@ -10,7 +10,7 @@ namespace Checktify.Entity.WebApplication.ViewModels.AttendanceVM
     public class AttendanceListVM
     {
         public virtual Guid Id { get; set; }
-        public virtual string CreatedDate { get; set; } = DateTime.Now.ToString("d");
+        public virtual string CreatedDate { get; set; } = null!;
         public virtual string? UpdatedDate { get; set; }
 
         public Guid CompanyId { get; set; }

@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Configuration\Identity\" />
     <Folder Include="Extensions\Identity\" />
   </ItemGroup>
 

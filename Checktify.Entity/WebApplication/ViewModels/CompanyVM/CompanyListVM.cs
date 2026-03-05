@@ -11,7 +11,7 @@ namespace Checktify.Entity.WebApplication.ViewModels.CompanyVM
         public bool Active { get; set; }
 
         public virtual Guid Id { get; set; }
-        public virtual string CreatedDate { get; set; } = DateTime.Now.ToString("d");
+        public virtual string CreatedDate { get; set; } = null!;
         public virtual string? UpdatedDate { get; set; }
     }
 }

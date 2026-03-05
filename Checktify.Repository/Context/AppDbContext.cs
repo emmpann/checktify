@@ -1,4 +1,5 @@
-﻿using Checktify.Entity.Identity.Entities;
+﻿using Checktify.Core.Entities;
+using Checktify.Entity.Identity.Entities;
 using Checktify.Entity.WebApplication.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,7 @@ namespace Checktify.Repository.Context
         }
 
         public DbSet<Company> Companies { get; set; }
-        public DbSet<AppUser> Users { get; set; }
+        //public DbSet<AppUser> Users { get; set; }
         public DbSet<OfficeLocation> OfficeLocations { get; set; }
         public DbSet<WorkSchedule> WorkSchedules { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
@@ -29,6 +30,30 @@ namespace Checktify.Repository.Context
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity entity)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            entity.CreatedDate = DateTime.Now.ToString("d");
+                            break;
+                        case EntityState.Modified:
+                            Entry(entity).Property(x => x.CreatedDate).IsModified = false;
+                            entity.UpdatedDate = DateTime.Now.ToString("d");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }
