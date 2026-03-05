@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Checktify.Repository.Repositories.Abstract
 {
-    public interface IGenericRepositories<T> where T:class,IBaseEntity
+    public interface IGenericRepositories<T> where T:class,IBaseEntity,new()
     {
         Task AddEntityAsync(T entity);
         void UpdateEntity(T entity);
