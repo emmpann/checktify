@@ -1,6 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Checktify.Entity.WebApplication.ViewModels.UserVM
 {
@@ -11,5 +9,7 @@ namespace Checktify.Entity.WebApplication.ViewModels.UserVM
         public string Email { get; set; }
         public Guid? CompanyId { get; set; }
         public Guid? WorkScheduleId { get; set; }
+        public string SelectedRole { get; set; }
+        public IEnumerable<SelectListItem> Roles { get; set; }
     }
 }

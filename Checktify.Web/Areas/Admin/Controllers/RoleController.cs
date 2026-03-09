@@ -1,11 +1,11 @@
-﻿using Checktify.Entity.WebApplication.ViewModels.OfficeLocationVM;
-using Checktify.Entity.WebApplication.ViewModels.RoleVM;
-using Checktify.Service.Services.Abstract;
+﻿using Checktify.Entity.WebApplication.ViewModels.RoleVM;
+using Checktify.Service.Services.Identity.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Checktify.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class RoleController : Controller
     {

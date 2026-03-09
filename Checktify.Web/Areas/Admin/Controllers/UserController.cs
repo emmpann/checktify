@@ -1,5 +1,6 @@
 using Checktify.Entity.Identity.Entities;
 using Checktify.Entity.WebApplication.ViewModels.UserVM;
+using Checktify.Service.Services.Identity.Abstract;
 using Checktify.Service.Services.WebApplication.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,19 +12,21 @@ using System.Threading.Tasks;
 
 namespace Checktify.Web.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ICompanyService _companyService;
         private readonly IWorkScheduleService _workScheduleService;
+        private readonly IRoleService _roleService;
 
-        public UserController(UserManager<AppUser> userManager, ICompanyService companyService, IWorkScheduleService workScheduleService)
+        public UserController(UserManager<AppUser> userManager, ICompanyService companyService, IWorkScheduleService workScheduleService, IRoleService roleService)
         {
             _userManager = userManager;
             _companyService = companyService;
             _workScheduleService = workScheduleService;
+            _roleService = roleService;
         }
 
         public async Task<IActionResult> Index()
@@ -44,6 +47,8 @@ namespace Checktify.Web.Areas.Admin.Controllers
 
             var companies = await _companyService.GetAllAsync();
             var schedules = await _workScheduleService.GetAllAsync();
+            var roles = await _roleService.GetAllAsync();
+            var userRoles = await _userManager.GetRolesAsync(user);
 
             ViewBag.Companies = new SelectList(companies, "Id", "Name", user.CompanyId);
             ViewBag.WorkSchedules = new SelectList(schedules, "Id", "Name", user.WorkScheduleId);
@@ -54,7 +59,14 @@ namespace Checktify.Web.Areas.Admin.Controllers
                 UserName = user.UserName,
                 Email = user.Email,
                 CompanyId = user.CompanyId,
-                WorkScheduleId = user.WorkScheduleId
+                WorkScheduleId = user.WorkScheduleId,
+                SelectedRole = userRoles.FirstOrDefault(),
+                Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Name,
+                    Text = r.Name,
+                    Selected = userRoles.Contains(r.Name)
+                })
             };
 
             return View(model);
@@ -68,8 +80,10 @@ namespace Checktify.Web.Areas.Admin.Controllers
             {
                 var companies = await _companyService.GetAllAsync();
                 var schedules = await _workScheduleService.GetAllAsync();
+                
                 ViewBag.Companies = new SelectList(companies, "Id", "Name", model.CompanyId);
                 ViewBag.WorkSchedules = new SelectList(schedules, "Id", "Name", model.WorkScheduleId);
+                
                 return View(model);
             }
 
@@ -91,6 +105,13 @@ namespace Checktify.Web.Areas.Admin.Controllers
                 ViewBag.Companies = new SelectList(companies, "Id", "Name", model.CompanyId);
                 ViewBag.WorkSchedules = new SelectList(schedules, "Id", "Name", model.WorkScheduleId);
                 return View(model);
+            }
+            
+            if (!string.IsNullOrEmpty(model.SelectedRole))
+            {
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                await _userManager.AddToRoleAsync(user, model.SelectedRole);
             }
 
             return RedirectToAction("Index");

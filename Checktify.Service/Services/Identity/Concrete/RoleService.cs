@@ -2,13 +2,13 @@
 using AutoMapper.QueryableExtensions;
 using Checktify.Entity.Identity.Entities;
 using Checktify.Entity.WebApplication.ViewModels.RoleVM;
+using Checktify.Service.Services.Identity.Abstract;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
-namespace Checktify.Service.Services.WebApplication.Concrete
+namespace Checktify.Service.Services.Identity.Concrete
 {
-    public class RoleService
+    public class RoleService : IRoleService
     {
         private readonly RoleManager<AppRole> _roleManager;
         private readonly IMapper _mapper;
@@ -43,8 +43,7 @@ namespace Checktify.Service.Services.WebApplication.Concrete
 
         public async Task<RoleUpdateVM> GetRoleById(Guid id)
         {
-            //return _roleManager.FindByIdAsync(id.ToString())
-            //return;
+            return await _roleManager.Roles.Where(r => r.Id == id.ToString()).ProjectTo<RoleUpdateVM>(_mapper.ConfigurationProvider).FirstOrDefaultAsync() ?? throw new Exception("Role not found");
         }
 
         public async Task<IdentityResult> UpdateRoleAsync(RoleUpdateVM request)

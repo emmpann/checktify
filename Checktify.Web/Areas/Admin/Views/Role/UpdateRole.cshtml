@@ -34,18 +34,10 @@
                         <form asp-area="Admin" asp-controller="Role" asp-action="UpdateRole" method="post">
 
                             <input type="hidden" asp-for="Id" />
-                            <input type="hidden" asp-for="RowVersion" />
                             <div class="form-group">
                                 <label asp-for="Name" class="form-label">Name</label>
                                 <div asp-for="Name" class="form-control-wrap">
                                     <input asp-for="Name" type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" asp-for="Code">Code</label>
-                                <div class="form-control-wrap">
-                                    <input asp-for="Code" type="text" class="form-control">
                                 </div>
                             </div>
 

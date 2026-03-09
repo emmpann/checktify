@@ -1,6 +1,7 @@
 ﻿using Checktify.Core.Entities;
 using Checktify.Entity.Identity.Entities;
 using Checktify.Entity.WebApplication.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,8 +29,9 @@ namespace Checktify.Repository.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
