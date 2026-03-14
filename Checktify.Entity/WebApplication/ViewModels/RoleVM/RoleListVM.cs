@@ -8,6 +8,7 @@ namespace Checktify.Entity.WebApplication.ViewModels.RoleVM
     {
 
         //public string Code { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Checktify.Web.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class CompanyController : Controller
     {

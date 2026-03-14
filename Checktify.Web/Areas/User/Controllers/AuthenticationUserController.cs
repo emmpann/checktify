@@ -15,14 +15,16 @@ namespace Checktify.Web.Areas.User.Controllers
     public class AuthenticationUserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly IValidator<UserEditVM> _userEditValidator;
         private readonly IAuthenticationUserService _authenticationUserService;
 
-        public AuthenticationUserController(UserManager<AppUser> userManager, IValidator<UserEditVM> userEditValidator, IAuthenticationUserService authenticationUserService)
+        public AuthenticationUserController(UserManager<AppUser> userManager, IValidator<UserEditVM> userEditValidator, IAuthenticationUserService authenticationUserService, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _userEditValidator = userEditValidator;
             _authenticationUserService = authenticationUserService;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -56,5 +58,6 @@ namespace Checktify.Web.Areas.User.Controllers
             ViewBag.Username = user!.UserName;
             return RedirectToAction("Index", "Dashboard", new { area = "User" });
         }
+
     }
 }

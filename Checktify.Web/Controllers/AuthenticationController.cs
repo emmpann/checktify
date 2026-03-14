@@ -75,7 +75,7 @@ namespace Checktify.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> LogIn(LogInVM request, string? returnUrl = null)
         {
-            returnUrl ??= Url.Action("Index", "Dashboard", new { Area = "User" });
+            
             var validation = await _logInValidator.ValidateAsync(request);
             if (!validation.IsValid)
             {
@@ -87,7 +87,7 @@ namespace Checktify.Web.Controllers
             if (hasUser == null)
             {
                 ViewBag.Result = "NotSucceed";
-                ModelState.AddModelErrorsList(new List<String> { "Email or Password is wrong" });
+                ModelState.AddModelErrorsList(new List<string> { "Email or Password is wrong" });
                 return View();
             }
 
@@ -95,18 +95,20 @@ namespace Checktify.Web.Controllers
             if (logInResult.Succeeded)
             {
                 _toasty.AddSuccessToastMessage("You have logged in successfully!", new ToastrOptions { Title = "Welcome Back" });
+
+                returnUrl ??= Url.Action("Index", "Dashboard", new { Area = "Admin" });
                 return Redirect(returnUrl!);
             }
 
             if (logInResult.IsLockedOut)
             {
                 ViewBag.Result = "LockedOut";
-                ModelState.AddModelErrorsList(new List<String> { "Your account is locked out for 60 seconds!" });
+                ModelState.AddModelErrorsList(new List<string> { "Your account is locked out for 60 seconds!" });
                 return View();
             }
 
             ViewBag.Result = "FailedAttempt";
-            ModelState.AddModelErrorsList(new List<String> { $"Email or Password is wrong! Failed attempt{await _userManager.GetAccessFailedCountAsync(hasUser)}" });
+            ModelState.AddModelErrorsList(new List<string> { $"Email or Password is wrong! Failed attempt{await _userManager.GetAccessFailedCountAsync(hasUser)}" });
             return View();
         }
 
@@ -198,6 +200,12 @@ namespace Checktify.Web.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Redirect("/Home/Index");
         }
     }
 }
