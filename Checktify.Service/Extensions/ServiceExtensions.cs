@@ -28,10 +28,10 @@ namespace Checktify.Service.Extensions
                 }
             }
 
-            services.AddFluentValidationAutoValidation(cfg =>
-            {
-                cfg.DisableDataAnnotationsValidation = true;
-            });
+            //services.AddFluentValidationAutoValidation(cfg =>
+            //{
+            //    cfg.DisableDataAnnotationsValidation = true;
+            //});
 
             services.AddValidatorsFromAssemblyContaining<CompanyAddValidation>();
 

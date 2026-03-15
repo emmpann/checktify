@@ -9,6 +9,7 @@ namespace Checktify.Service.Services.WebApplication.Abstract
     {
         Task<List<AttendanceListVM>> GetAllAsync();
         Task<AttendanceAddVM> GetOpenAttendanceByUserIdAsync(string userId);
+        
         Task AddAttendanceAsync(AttendanceAddVM request);
         Task DeleteAttendanceAsync(Guid id);
         Task<AttendanceUpdateVM> GetAttendanceById(Guid id);

@@ -6,5 +6,6 @@ namespace Checktify.API.Controllers
     [ApiController]
     public class AttendanceController : ControllerBase
     {
+        
     }
 }
