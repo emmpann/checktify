@@ -21,10 +21,30 @@ namespace Checktify.API.Controllers
         public async Task<ActionResult<LoginResult>> Login(LogInRequest request)
         {
             var result = await _authService.LoginAsync(request);
-            return result.Success ? Ok(new ApiResponse<LoginResult> { Success = true, Message = "BERHASIL", Data = result, Errors = null}) : Unauthorized(result);
-            //if (result == null || result.User == null)
-            //    return Unauthorized(new { message = "Invalid credentials" });
-            //return Ok(result);
+
+            if (!result.Success)
+            {
+                return Unauthorized(
+                        new ApiResponse<LoginResponse>
+                        {
+                            Success = false,
+                            Message = "Invalid email or password",
+                            Errors = result.Errors
+                        });
+            }
+
+            return Ok(
+                new ApiResponse<LoginResponse>
+                {
+                    Success = true,
+                    Message = "Login Succesfully",
+                    Data = new LoginResponse
+                    {
+                        Token = result.Token!,
+                        ExpiresIn = result.ExpiresIn,
+                        User = result.User,
+                    }
+                });
         }
 
         [HttpPost("register")]
