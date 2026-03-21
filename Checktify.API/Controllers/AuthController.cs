@@ -55,32 +55,5 @@ namespace Checktify.API.Controllers
                 return BadRequest(new { message = "Registration failed" });
             return Ok(result);
         }
-
-        //private ActionResult ToActionResult<T>(Result<T> result)
-        //{
-        //    if (result.IsSuccess)
-        //        return Ok(new
-        //        {
-        //            data = result.Value,
-        //            messages = result.Successes.Select(s => s.Message)
-        //        });
-
-        //    var errors = result.Errors.Select(e => new
-        //    {
-        //        type = e.GetType().Name,
-        //        message = e.Message,
-        //        field = e is ValidationError ve ? ve.Field : null
-        //    });
-
-        //        return result.Errors.FirstOrDefault() switch
-        //        {
-        //            ValidationError => BadRequest(new { errors }),
-        //            NotFoundError => NotFound(new { errors }),
-        //            ConflictError => Conflict(new { errors }),
-        //            BusinessRuleError => UnprocessableEntity(new { errors }),
-        //            InfrastructureError => StatusCode(500, new { errors }),
-        //            _ => BadRequest(new { errors })
-        //        };
-        //}
     }
 }
